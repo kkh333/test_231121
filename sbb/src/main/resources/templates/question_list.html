@@ -5,6 +5,27 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>아아아아아</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="question : ${questionList}">
+                <td th:text="${question.id}"></td>
+                <!--이렇게도 출력 가능-->
+                <!--<td>[[${question.subject}]]</td>-->
+                <td>
+                    <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+                </td>
+                <td th:text="${question.content}"></td>
+                <td th:text="${question.createDate}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
