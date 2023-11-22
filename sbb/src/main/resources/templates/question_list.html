@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <table>
-        <thead>
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+    <table class="table">
+        <thead class="table-dark">
             <tr>
                 <th>번호</th>
                 <th>제목</th>
@@ -15,7 +10,10 @@
             </tr>
         </thead>
         <tbody>
+<!--        loop쓰면 뭐가 다른건지-->
+<!--            <tr th:each="question, loop : ${questionList}">-->
             <tr th:each="question : ${questionList}">
+<!--                <td th:text="${loop.count}"></td>-->
                 <td th:text="${question.id}"></td>
                 <!--이렇게도 출력 가능-->
                 <!--<td>[[${question.subject}]]</td>-->
@@ -23,9 +21,10 @@
                     <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
                 </td>
                 <td th:text="${question.content}"></td>
-                <td th:text="${question.createDate}"></td>
+                <td th:text="${#temporals.format(question.createDate, 'yy-MM-dd HH:mm')}"></td>
             </tr>
         </tbody>
     </table>
-</body>
+    <a th:href="@{/question/create}" class="btn btn-primary">질문 등록하기</a>
+</div>
 </html>
